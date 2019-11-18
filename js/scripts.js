@@ -1,50 +1,69 @@
-var constantsScript = document.createElement('script');
+new Promise(function(resolve, reject) {
+	var constantsScript = document.createElement('script');
 	constantsScript.type = 'text/javascript';
 	constantsScript.src = 'js/constants.js';
-	
-var routerScript = document.createElement('script');
-	routerScript.type = 'text/javascript';
-	routerScript.src = 'js/router.js';
-	
-var dataScript = document.createElement('script');
+	resolve(document.body.append(constantsScript));
+});
+
+new Promise(function(resolve, reject) {
+	var dataScript = document.createElement('script');
 	dataScript.type = 'text/javascript';
 	dataScript.src = 'js/data.js';
-	
-var navbarScript = document.createElement('script');
+	resolve(document.body.append(dataScript));
+});
+
+new Promise(function(resolve, reject) {
+	var navbarScript = document.createElement('script');
 	navbarScript.type = 'text/javascript';
 	navbarScript.src = 'views/navbar.js';
-	
-var footerScript = document.createElement('script');
+	resolve(document.body.append(navbarScript));
+});
+
+new Promise(function(resolve, reject) {
+	var footerScript = document.createElement('script');
 	footerScript.type = 'text/javascript';
 	footerScript.src = 'views/footer.js';
-	
-var loginScript = document.createElement('script');
+	resolve(document.body.append(footerScript));
+});
+
+new Promise(function(resolve, reject) {
+	var routerScript = document.createElement('script');
+	routerScript.type = 'text/javascript';
+	routerScript.src = 'js/router.js';
+	resolve(document.body.append(routerScript));
+});
+
+new Promise(function(resolve, reject) {
+	var loginScript = document.createElement('script');
 	loginScript.type = 'text/javascript';
 	loginScript.src = 'views/login.js';
-	
-var mainScript = document.createElement('script');
+	resolve(document.body.append(loginScript));
+});
+
+new Promise(function(resolve, reject) {
+	var mainScript = document.createElement('script');
 	mainScript.type = 'text/javascript';
 	mainScript.src = 'views/main.js';
-	
-var cartScript = document.createElement('script');
+	resolve(document.body.append(mainScript));
+});
+
+new Promise(function(resolve, reject) {
+	var cartScript = document.createElement('script');
 	cartScript.type = 'text/javascript';
 	cartScript.src = 'views/cart.js';
-	
-var invoicesScript = document.createElement('script');
+	resolve(document.body.append(cartScript));
+});
+
+new Promise(function(resolve, reject) {
+	var invoicesScript = document.createElement('script');
 	invoicesScript.type = 'text/javascript';
 	invoicesScript.src = 'views/invoices.js';
-	
-var appScript = document.createElement('script');
+	resolve(document.body.append(invoicesScript));
+});
+
+new Promise(function(resolve, reject) {
+	var appScript = document.createElement('script');
 	appScript.type = 'text/javascript';
 	appScript.src = 'js/app.js';
-	
-document.body.append(constantsScript);
-document.body.append(routerScript);
-document.body.append(dataScript);
-document.body.append(navbarScript);
-document.body.append(footerScript);
-document.body.append(loginScript);
-document.body.append(mainScript);
-document.body.append(cartScript);
-document.body.append(invoicesScript);
-document.body.append(appScript);
+	resolve(document.body.append(appScript));
+});
