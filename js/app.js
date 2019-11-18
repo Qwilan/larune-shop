@@ -237,13 +237,17 @@ function updateLocalGoods(good) {
 	if (!localGoods) {
 		localGoods = [];
 	}
+	var newLocalGoods = [];
 	for (var i = 0; i < localGoods.length; i++) {
-		var newGood = localGoods[i].id;
 		if (localGoods[i].id == good.id) {
-			localGoods[i] = good;
+			if (good.count) {
+				newLocalGoods.push(good);
+			}
+		} else {
+			newLocalGoods.push(localGoods[i]);
 		}
 	}
-	window.localStorage.setItem('goods', JSON.stringify(localGoods));
+	window.localStorage.setItem('goods', JSON.stringify(newLocalGoods));
 };
 
 function checkoutValidate(good, count) {

@@ -6,6 +6,8 @@ function renderCart(node) {
 		cart = [];
 	}
 	
+	var sum = 0;
+	
 	var container = document.createElement('div');
 		container.className = 'container mb-4';
 	var row = document.createElement('div');
@@ -26,7 +28,7 @@ function renderCart(node) {
 				<th scope="col">Available</th>
 				<th scope="col">Price</th>
 				<th scope="col">Quantity</th>
-				<th> </th>
+				<th width="10%"> </th>
 			</tr>
 		`;
 	var tbody = document.createElement('tbody');
@@ -36,7 +38,7 @@ function renderCart(node) {
 		var count = (cart[i].count <= good.count)
 			? cart[i].count
 			: good.count;
-		
+		sum += cart[i].count * cart[i].price;
 		var tr = document.createElement('tr');
 			tr.className = 'cart-tr';
 		var img = document.createElement('img');
@@ -57,6 +59,7 @@ function renderCart(node) {
 				onQuantityBlur(this.id.slice(-1), this.value);
 			};
 		var actionTd = document.createElement('td');
+			actionTd.className = 'text-right';
 		var button = document.createElement('button');
 			button.id = cart[i].id;
 			button.className = 'btn btn-sm btn-danger';
@@ -77,12 +80,56 @@ function renderCart(node) {
 		tr.append(imgTd);
 		tr.append(nameTd);
 		tr.append(countTd);
-		tr.append(priceTd);
 		tr.append(quantityTd);
+		tr.append(priceTd);
 		tr.append(actionTd);
 		
 		tbody.append(tr);
 	}
+	
+	var trSub = document.createElement('tr');
+		trSub.innerHTML = `
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>Sub-Total</td>
+		`;
+	var trSubTd = document.createElement('td');
+		trSubTd.className = 'text-right';
+		trSubTd.innerHTML = sum + ' ₽'
+	
+	var trShipping = document.createElement('tr');
+		trShipping.innerHTML = `
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>Shipping</td>
+		`;
+	var trShippingTd = document.createElement('td');
+		trShippingTd.className = 'text-right';
+		trShippingTd.innerHTML = shippingCost + ' ₽'
+		
+	var trTotal = document.createElement('tr');
+		trTotal.innerHTML = `
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>Total</td>
+		`;
+	var trTotalTd = document.createElement('td');
+		trTotalTd.className = 'text-right';
+		trTotalTd.innerHTML = sum + shippingCost + ' ₽'
+		
+	trSub.append(trSubTd);
+	trShipping.append(trShippingTd);
+	trTotal.append(trTotalTd);
+	
+	tbody.append(trSub);
+	tbody.append(trShipping);
+	tbody.append(trTotal);
 	
 	col2.innerHTML = `
 	<div class="col mb-2">
