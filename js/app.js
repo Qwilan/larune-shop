@@ -7,9 +7,6 @@ function init() {
 		window.localStorage.setItem('goods', JSON.stringify(goods));
 	}
 	
-	console.log(route);
-	console.log(isAuth());
-	
 	root.innerHTML = '';
 	
 	if (isAuth() && route === routes.login) {
@@ -132,7 +129,6 @@ function authHandler() {
 	}
 	
 	if (isAuth()) {
-		console.log("logged in");
 		goRoute(routes.main);
 		return;
 	}
@@ -198,7 +194,6 @@ function addGoodhandler(id) {
 };
 
 function removeGoodhandler(id) {
-	console.log(id);
 	if (!id && id != 0) return;
 	var cart = JSON.parse(localStorage.getItem("cart"));
 	if (!cart) {
@@ -225,7 +220,6 @@ function onQuantityBlur(id, count) {
 	var good = getGoodById(id);
 	for (var i = 0; i < cart.length; i++) {
 		if (cart[i].id == id) {
-			console.log(true);
 			var newCount = (count <= good.count)
 				? count
 				: good.count;
@@ -266,8 +260,6 @@ function checkoutHandler() {
 		cart = [];
 	}
 	
-	console.log(cart);
-	
 	if (!cart || !cart.length) {
 		return;
 	}
@@ -277,8 +269,6 @@ function checkoutHandler() {
 		checkout = [];
 	}
 	
-	console.log(checkout);
-	
 	checkout.push({
 		id: newGuid(),
 		client: adminLogin,
@@ -286,19 +276,14 @@ function checkoutHandler() {
 		goods: cart,
 	});
 	
-	console.log(checkout);
-	
 	var isCheckout = false;
 	
 	for (var i = 0; i < cart.length; i++) {
 		var good = getGoodById(cart[i].id);
 		const isValid = checkoutValidate(good, cart[i].count);
-		console.log(5, isValid);
 		if (isValid) {
-			console.log('asdasd');
 			var newGood = good;
 			newGood.count -= cart[i].count;
-			console.log(newGood.count);
 			updateLocalGoods(newGood);
 			isCheckout = true;
 		}
