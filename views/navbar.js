@@ -17,6 +17,9 @@ function renderNavBar(node) {
 					<li id="nav-cart" class="nav-item active">
 						<a class="nav-link" href="#" onClick="goRoute(routes.cart);return false;">Cart <span class="sr-only">(current)</span></a>
 					</li>
+					<li id="nav-invoices" class="nav-item active">
+						<a class="nav-link" href="#" onClick="goRoute(routes.invoices);return false;">Invoices <span class="sr-only">(current)</span></a>
+					</li>
 				</ul>
 
 				<form class="nav-form form-inline my-2 my-lg-0">
@@ -44,11 +47,19 @@ function renderNavBar(node) {
 	if (route === routes.main) {
 		document.getElementById('nav-home').classList.add('active');
 		document.getElementById('nav-cart').classList.remove('active');
+		document.getElementById('nav-invoices').classList.remove('active');
 	}
 	
 	if (route === routes.cart) {
 		document.getElementById('nav-home').classList.remove('active');
 		document.getElementById('nav-cart').classList.add('active');
+		document.getElementById('nav-invoices').classList.remove('active');
+	}
+	
+	if (route === routes.invoices) {
+		document.getElementById('nav-home').classList.remove('active');
+		document.getElementById('nav-cart').classList.remove('active');
+		document.getElementById('nav-invoices').classList.add('active');
 	}
 	
 	var cart = JSON.parse(window.localStorage.getItem('cart'));

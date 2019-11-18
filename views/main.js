@@ -1,4 +1,6 @@
 function renderMainPage(node) {
+	var localGoods = JSON.parse(window.localStorage.getItem('goods'));
+	
 	var mainPage = document.createElement("div");
 		mainPage.className = 'main';
 	
@@ -8,14 +10,14 @@ function renderMainPage(node) {
 	var row = document.createElement("div");
 		row.className = "row";
 	
-	for (var i = 0; i < goods.length; i++) {
-		var good = getGoodFromCartById(goods[i].id);
+	for (var i = 0; i < localGoods.length; i++) {
+		var good = getGoodFromCartById(localGoods[i].id);
 		
 		var col = document.createElement('div');
 			col.className = 'col-md-3 col-sm-6 m-b-15 m-t-15';
 		
 		var productGrid = document.createElement('div');
-			productGrid.id = 'grid-' + goods[i].id;
+			productGrid.id = 'grid-' + localGoods[i].id;
 			productGrid.className = 'product-grid4';
 		
 		if (good) {
@@ -29,30 +31,29 @@ function renderMainPage(node) {
 		
 		var img1 = document.createElement("img");
 			img1.className = "pic-1";
-			img1.src = goods[i].img1;
+			img1.src = localGoods[i].img1;
 		var img2 = document.createElement("img");
 			img2.className = "pic-2";
-			img2.src = goods[i].img2;
+			img2.src = localGoods[i].img2;
 		
 		var span = document.createElement('span');
 			span.className = 'product-discount-label';
-			span.innerHTML = goods[i].count;
+			span.innerHTML = localGoods[i].count;
 
 		var productContent = document.createElement('div');
 			productContent.className = 'product-content';
 		
 		var title = document.createElement('h3');
 			title.className = "title";
-			title.innerHTML = goods[i].name;
+			title.innerHTML = localGoods[i].name;
 		
 		var price = document.createElement('div');
 			price.className = 'price';
-			price.innerHTML = goods[i].price + '₽';
+			price.innerHTML = localGoods[i].price + '₽';
 		
-		var addA = document.createElement('a');
-			addA.id = goods[i].id;
+		var addA = document.createElement('button');
+			addA.id = localGoods[i].id;
 			addA.className = 'add-to-cart';
-			addA.href = '';
 			addA.onclick = function() {
 				var localGood = getGoodFromCartById(this.id);
 				var a = document.getElementById(this.id);
@@ -68,7 +69,6 @@ function renderMainPage(node) {
 				}
 				return false;
 			};
-		
 		if (good) {
 			addA.innerHTML = 'REMOVE FROM CART';
 		} else {
@@ -82,7 +82,9 @@ function renderMainPage(node) {
 
 		productContent.append(title);
 		productContent.append(price);
-		productContent.append(addA);
+		if (localGoods[i].count) {
+			productContent.append(addA);
+		}
 
 		productGrid.append(productImage);
 		productGrid.append(productContent);

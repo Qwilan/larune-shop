@@ -25,12 +25,18 @@ function renderCart(node) {
 				<th scope="col">Product</th>
 				<th scope="col">Available</th>
 				<th scope="col">Price</th>
+				<th scope="col">Quantity</th>
 				<th> </th>
 			</tr>
 		`;
 	var tbody = document.createElement('tbody');
 	
 	for (var i = 0; i < cart.length; i++) {
+		var good = getGoodById(cart[i].id);
+		var count = (cart[i].count <= good.count)
+			? cart[i].count
+			: good.count;
+		
 		var tr = document.createElement('tr');
 			tr.className = 'cart-tr';
 		var img = document.createElement('img');
@@ -39,9 +45,17 @@ function renderCart(node) {
 		var nameTd = document.createElement('td');
 			nameTd.innerHTML = cart[i].name;
 		var countTd = document.createElement('td');
-			countTd.innerHTML = cart[i].count;
+			countTd.innerHTML = good.count;
 		var priceTd = document.createElement('td');
-			priceTd.innerHTML = cart[i].price + '₽';
+			priceTd.innerHTML = cart[i].price + ' ₽';
+		var quantityTd = document.createElement('td');
+		var input = document.createElement('input');
+			input.id = 'cart-quantity-' + cart[i].id;
+			input.value = count;
+			input.className = 'form-control';
+			input.onblur = function() {
+				onQuantityBlur(this.id.slice(-1), this.value);
+			};
 		var actionTd = document.createElement('td');
 		var button = document.createElement('button');
 			button.id = cart[i].id;
@@ -57,12 +71,14 @@ function renderCart(node) {
 			};
 		
 		actionTd.append(button);
+		quantityTd.append(input);
 		
 		imgTd.append(img);
 		tr.append(imgTd);
 		tr.append(nameTd);
 		tr.append(countTd);
 		tr.append(priceTd);
+		tr.append(quantityTd);
 		tr.append(actionTd);
 		
 		tbody.append(tr);
@@ -75,7 +91,7 @@ function renderCart(node) {
 				<button class="btn btn-lg btn-block btn-light" onClick="goRoute(routes.main)">Continue Shopping</button>
 			</div>
 			<div id="cart-checkout-container" class="col-sm-12 col-md-6 text-right">
-				<button id="cart-checkout" class="btn btn-lg btn-block my-btn text-uppercase">Checkout</button>
+				<button id="cart-checkout" class="btn btn-lg btn-block my-btn text-uppercase" onClick="checkoutHandler()">Checkout</button>
 			</div>
 		</div>
 	</div>
