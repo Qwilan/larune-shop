@@ -30,6 +30,10 @@ var cartScript = document.createElement('script');
 	cartScript.type = 'text/javascript';
 	cartScript.src = 'views/cart.js';
 	
+var invoicesScript = document.createElement('script');
+	invoicesScript.type = 'text/javascript';
+	invoicesScript.src = 'views/invoices.js';
+	
 var appScript = document.createElement('script');
 	appScript.type = 'text/javascript';
 	appScript.src = 'js/app.js';
@@ -42,4 +46,5 @@ document.body.append(footerScript);
 document.body.append(loginScript);
 document.body.append(mainScript);
 document.body.append(cartScript);
+document.body.append(invoicesScript);
 document.body.append(appScript);

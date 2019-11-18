@@ -1,8 +1,6 @@
 function goRoute(route) {
 	if (!route && route != "") return;
 	
-	console.log(route);
-	
 	var prevRoute = getRoute(window.location.hash);
 	
 	if (prevRoute == route) {
