@@ -26,8 +26,8 @@ function renderCart(node) {
 				<th scope="col"> </th>
 				<th scope="col">Product</th>
 				<th scope="col">Available</th>
-				<th scope="col">Price</th>
 				<th scope="col">Quantity</th>
+				<th scope="col">Price</th>
 				<th width="10%"> </th>
 			</tr>
 		`;
