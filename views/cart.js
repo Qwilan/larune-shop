@@ -147,7 +147,9 @@ function renderCart(node) {
 	table.append(thead);
 	table.append(tbody);
 	tableDiv.append(table);
-	col1.append(tableDiv);
+	if (cart.length) {
+		col1.append(tableDiv);
+	}
 	row.append(col1);
 	row.append(col2);
 	container.append(row);
