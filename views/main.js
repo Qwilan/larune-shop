@@ -31,10 +31,10 @@ function renderMainPage(node) {
 		
 		var img1 = document.createElement("img");
 			img1.className = "pic-1";
-			img1.src = localGoods[i].img1;
+			img1.src = "assets/" + localGoods[i].img1;
 		var img2 = document.createElement("img");
 			img2.className = "pic-2";
-			img2.src = localGoods[i].img2;
+			img2.src = "assets/" + localGoods[i].img2;
 		
 		var span = document.createElement('span');
 			span.className = 'product-discount-label';
